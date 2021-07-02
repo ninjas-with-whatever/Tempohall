@@ -15,7 +15,7 @@ const options = {
 
 setInterval(() => {
   getCurrentTrack().then(({ tempo, player }) => {
-    console.log(player);
+    console.log(Date.now() - player.timestamp, player.progress_ms);
     const currentDelay = Math.floor(60 * 1000 / tempo)
     if (currentDelay !== options.delay) {
       options.delay = currentDelay;

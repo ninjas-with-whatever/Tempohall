@@ -28,7 +28,6 @@ const getTrackFeatures = async (id) => {
 
 const getCurrentTrack = async () => {
   const { item, ...player } = await getCurrentPlayingTrack();
-  console.log(player);
   return {
     item,
     player,
