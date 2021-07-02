@@ -26,6 +26,7 @@ router.get('/callback', (req, res) => {
     
     const { access_token } = JSON.parse(stdout)
 
+    console.log(access_token)
     setAccessToken(access_token)
 
     res.redirect('/welcome')
