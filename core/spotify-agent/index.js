@@ -8,9 +8,9 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 const getCurrentPlayingTrack = () => {
-  spotifyApi.getMyCurrentPlayingTrack()
+  spotifyApi.getMe()
     .then(function(data) {
-      console.log('Now playing: ', data.body);
+      console.log('Some information about the authenticated user', data.body);
     }, function(err) {
       console.log('Something went wrong!', err);
     });
