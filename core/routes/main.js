@@ -18,12 +18,17 @@ router.get('/login', (_, res) => {
 router.get('/callback', (req, res) => {
   const { code } = req.query
   console.log(authorizationToken, code);
-  axios.post('https://accounts.spotify.com/api/token', {
-    grant_type: 'authorization_code',
-    code,
-    redirect_uri: baseUri + '/callback'
-  }, {
-    headers: { 'Authorization': 'Basic ' + authorizationToken }
+  axios({
+    method: 'post',
+    url: 'https://accounts.spotify.com/api/token',
+    data:{
+      grant_type: 'authorization_code',
+      code,
+      redirect_uri: baseUri + '/callback'
+    },
+    headers: {
+      'Authorization': 'Basic ' + authorizationToken
+    }
   }).then((response) => {
     console.log(response.data);
     res.redirect(baseUri + '/welcome');
