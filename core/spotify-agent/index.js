@@ -26,9 +26,7 @@ const getCurrentPlayingTrack = () => {
 }
 
 const setup = () => {
-  setInterval(() => {
-    getCurrentPlayingTrack()
-  }, 2000)
+  getCurrentPlayingTrack()
 }
 
 if (store.state.accessToken) {
