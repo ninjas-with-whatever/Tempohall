@@ -33,6 +33,7 @@ router.get('/callback', (req, res) => {
     console.log(response.data);
     res.redirect(baseUri + '/welcome');
   }).catch((error) => {
+    console.log(error.response);
     res.end('Error on Authentication');
   });
 });
