@@ -29,7 +29,8 @@ router.get('/callback', (req, res) => {
     redirect_uri: baseUri + '/callback'
   }, {
     headers: {
-      'Authorization': 'Basic ' + authorizationToken
+      'Authorization': 'Basic ' + authorizationToken,
+      'Content-Type': 'application/x-www-form-urlencoded'
     },
   })
     .then((response) => {
