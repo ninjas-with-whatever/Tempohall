@@ -11,11 +11,11 @@ const call = async (url = '', { method = 'GET' } = {}) => {
       "Content-Type": "application/json",
     }
   }
-  return await axios(options).data;
+  return (await axios(options)).data;
 }
 
 const getDevices = async () => {
-  return await call('me/player/devices').devices
+  return (await call('me/player/devices')).devices
 }
 
 module.exports = {
