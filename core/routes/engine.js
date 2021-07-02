@@ -14,9 +14,9 @@ const options = {
 }
 
 setInterval(() => {
-  try {
-    options.tempo = 60000 / (await getCurrentTrackFeatures()).tempo
-  } catch (e) {}
+  getCurrentTrackFeatures().then(({ tempo }) => {
+    options.delay = 60 * 1000 / tempo
+  })
 }, 5000)
 
 router.post('/options', async (req, res, next) => {
