@@ -15,7 +15,8 @@ const options = {
 
 setInterval(() => {
   getCurrentTrackFeatures().then(({ tempo }) => {
-    options.delay = 60 * 1000 / tempo
+    options.delay = Math.floor(60 * 1000 / tempo)
+    console.log(options.delay)
   })
 }, 5000)
 

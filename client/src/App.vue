@@ -30,7 +30,7 @@ export default {
       options: {
         delay: 500,
       },
-      step: STEPS.DELAY
+      step: STEPS.MODE
     };
   },
   computed: {
