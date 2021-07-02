@@ -29,9 +29,6 @@ const setup = () => {
   getCurrentPlayingTrack()
 }
 
-if (store.state.accessToken) {
-  setAccessToken(store.state.accessToken)
-}
 
 module.exports = {
   setAccessToken
