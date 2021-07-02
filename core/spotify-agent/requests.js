@@ -15,7 +15,7 @@ const call = async (url = '', { method = 'GET' } = {}) => {
 }
 
 const getDevices = async () => {
-  return await call('player/devices')
+  return await call('me/player/devices')
 }
 
 module.exports = {
