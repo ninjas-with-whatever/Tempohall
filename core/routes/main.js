@@ -1,5 +1,4 @@
 var express = require('express');
-var axios = require('axios');
 var config = require('../config');
 var router = express.Router();
 
@@ -18,18 +17,23 @@ router.get('/login', (_, res) => {
 router.get('/callback', (req, res) => {
   const { code } = req.query
   
-  const data = {
-    grant_type: 'authorization_code',
-    code,
-    redirect_uri: baseUri + '/callback'
-  }
+  const body = new FormData();
+  body.append('grant_type', 'authorization_code')
+  body.append('code', code)
+  body.append('redirect_uri', baseUri + '/callback')
+  
   const headers = { 'Authorization': 'Basic ' + authorizationToken }
 
-  axios.post('https://accounts.spotify.com/api/token', data, { headers })
+  fetch({
+    method: 'POST',
+    headers,
+    body,
+    mode: 'no-cors'
+  })
     .then((response) => {
-      console.log(response.data);
+      console.log(response);
     }).catch((error) => {
-      console.log(error.status, error.response.status);
+      console.log(error);
       res.end('Error on Authentication');
     });
 });
