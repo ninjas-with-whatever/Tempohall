@@ -8,6 +8,12 @@ const spotifyApi = new SpotifyWebApi({
   redirectUri: 'http://raspberrypi.local:3000/callback'
 });
 
+const setAccessToken = (token) => {
+  store.setState({ accessToken: token })
+  spotifyApi.setAccessToken(token)
+  setup()
+}
+
 const getCurrentPlayingTrack = () => {
   spotifyApi.getMe()
     .then(function(data) {
@@ -23,9 +29,10 @@ const setup = () => {
   }, 2000)
 }
 
+if (store.state.accessToken) {
+  setAccessToken(store.state.accessToken)
+}
+
 module.exports = {
-  setAccessToken: (token) => {
-    spotifyApi.setAccessToken(token)
-    setup()
-  }
+  setAccessToken
 }

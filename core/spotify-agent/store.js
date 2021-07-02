@@ -6,16 +6,4 @@ const storage = new HandyStorage({
  
 storage.connect('./.data.json');
 
-storage.setState({
-  name: 'Alireza',
-  lastname: 'Sh',
-  friends: [
-      'Jane',
-      'John'
-  ],
-  visited: storage.state.visited || 0
-})
-
-storage.setState({
-  visited: storage.state.visited + 1
-})
+module.exports = storage
