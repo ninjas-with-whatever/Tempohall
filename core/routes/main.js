@@ -25,16 +25,13 @@ router.get('/callback', (req, res) => {
   }
   const headers = { 'Authorization': 'Basic ' + authorizationToken }
 
-  console.log(data, headers);
-
-  axios.post('https://accounts.spotify.com/api/token', data, {
-    headers,
-  }).then((response) => {
-    console.log(response.data);
-    res.redirect(baseUri + '/welcome');
-  }).catch((error) => {
-    res.end('Error on Authentication');
-  });
+  axios.post('https://accounts.spotify.com/api/token', data, { headers })
+    .then((response) => {
+      console.log(response.data);
+    }).catch((error) => {
+      console.log(error.status, error.response.status);
+      res.end('Error on Authentication');
+    });
 });
 
 router.get('/welcome', (req, res) => {
