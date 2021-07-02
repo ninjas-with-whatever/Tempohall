@@ -18,7 +18,7 @@ router.get('/login', (_, res) => {
 router.get('/callback', (req, res) => {
   const { code } = req.query
 
-  axios.post('https://accounts.spotify.com/api/token', data, {
+  axios.post('https://accounts.spotify.com/api/token', {}, {
     params: {
       grant_type: 'authorization_code',
       code,
