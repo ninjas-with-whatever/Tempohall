@@ -28,7 +28,11 @@ const getTrackFeatures = async (id) => {
 
 const getCurrentTrackFeatures = async () => {
   const { item } = await getCurrentPlayingTrack();
-  return await getTrackFeatures(item.id)
+  console.log(item);
+  return {
+    item,
+    ...await getTrackFeatures(item.id)
+  }
 }
 
 module.exports = {
