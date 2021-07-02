@@ -2,8 +2,9 @@ var express = require('express');
 const { exec } = require("child_process");
 var config = require('../config');
 var router = express.Router();
+var { setAccessToken } = require('../spotify-agent');
 
-const { clientId, authorizationToken, setAccessToken } = config
+const { clientId, authorizationToken } = config
 const scopes = 'user-read-private user-read-email';
 const redirectUrl = encodeURIComponent('http://raspberrypi.local:3000/callback')
 
