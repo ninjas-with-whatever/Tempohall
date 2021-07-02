@@ -26,7 +26,6 @@ router.get('/callback', (req, res) => {
     
     const { access_token } = JSON.parse(stdout)
 
-    console.log(access_token)
     setAccessToken(access_token)
 
     res.redirect('/welcome')
@@ -34,7 +33,7 @@ router.get('/callback', (req, res) => {
 });
 
 router.get('/welcome', (req, res) => {
-  res.end(config.accessToken)
+  res.end('Logged in successfuly')
 });
 
 module.exports = router;
