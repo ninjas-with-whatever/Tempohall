@@ -3,7 +3,7 @@ const { exec } = require("child_process");
 var config = require('../config');
 var router = express.Router();
 
-const { clientId, authorizationToken } = config
+const { clientId, authorizationToken, setAccessToken } = config
 const scopes = 'user-read-private user-read-email';
 const redirectUrl = encodeURIComponent('http://raspberrypi.local:3000/callback')
 
@@ -24,14 +24,16 @@ router.get('/callback', (req, res) => {
       return;
     }
     
-    const response = JSON.parse(stdout)
+    const { access_token } = JSON.parse(stdout)
 
-    console.log(response)
+    setAccessToken(access_token)
+
+    res.redirect('/welcome')
   });
 });
 
 router.get('/welcome', (req, res) => {
-  res.end('WOOOHOOO')
+  res.end(config.accessToken)
 });
 
 module.exports = router;
