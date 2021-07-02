@@ -15,20 +15,16 @@ const options = {
 
 setInterval(() => {
   getCurrentTrackFeatures().then(({ tempo }) => {
-    options.delay = Math.floor(60 * 1000 / tempo)
-    console.log(options.delay)
+    const currentDelay = Math.floor(60 * 1000 / tempo)
+    if (currentDelay !== options.delay) {
+      options.delay = currentDelay;
+      powerController.start(options.delay, {
+        right: [[0.1, 0.1, 0.1, 0.1]],
+        left: [[0.1, 0.1, 0.1, 0.1]]
+      });
+    }
   })
 }, 5000)
-
-router.post('/options', async (req, res, next) => {
-  options.mode = req.body.mode;
-  res.end();
-});
-
-router.post('/start', function (req, res, next) {
-  powerController.start(options.delay, _.cloneDeep(options.mode));
-  res.end();
-});
 
 router.post('/offset', function (req, res, next) {
   powerController.offset = req.body.offset;
