@@ -1,8 +1,9 @@
 var express = require('express');
+var axios = require('axios');
 var config = require('../config');
 var router = express.Router();
 
-const { clientId, authorizationToken } = config
+const { clientId, clientSecret } = config
 const scopes = 'user-read-private user-read-email';
 const baseUri = 'http://raspberrypi.local:3000'
 
@@ -16,24 +17,26 @@ router.get('/login', (_, res) => {
 
 router.get('/callback', (req, res) => {
   const { code } = req.query
-  
-  const body = new FormData();
-  body.append('grant_type', 'authorization_code')
-  body.append('code', code)
-  body.append('redirect_uri', baseUri + '/callback')
-  
-  const headers = { 'Authorization': 'Basic ' + authorizationToken }
 
-  fetch({
-    method: 'POST',
-    headers,
-    body,
-    mode: 'no-cors'
+  axios.post('https://accounts.spotify.com/api/token', data, {
+    params: {
+      grant_type: 'authorization_code',
+      code,
+      redirect_uri: baseUri + '/callback'
+    },
+    headers: {
+      'Accept':'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    auth: {
+      username: clientId,
+      secret: clientSecret,
+    }
   })
     .then((response) => {
-      console.log(response);
+      console.log(response.data);
     }).catch((error) => {
-      console.log(error);
+      console.log(error.status, error.response.status);
       res.end('Error on Authentication');
     });
 });
