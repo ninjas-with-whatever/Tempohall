@@ -18,7 +18,12 @@ const getDevices = async () => {
   return (await call('me/player/devices')).devices
 }
 
+const getCurrentPlayingTrack = async () => {
+  return (await call('me/player/currently-playing?market=ES'))
+}
+
 module.exports = {
   call,
-  getDevices
+  getDevices,
+  getCurrentPlayingTrack
 }

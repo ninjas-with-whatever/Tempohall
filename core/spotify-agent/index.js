@@ -1,4 +1,4 @@
-const { getDevices } = require('./requests')
+const { getCurrentPlayingTrack } = require('./requests')
 const store = require('./store')
 
 const setAccessToken = (token) => {
@@ -7,11 +7,9 @@ const setAccessToken = (token) => {
 }
 
 const setup = () => {
-  getCurrentPlayingTrack()
-}
-
-const getCurrentPlayingTrack = async () => {
-  console.log(await getDevices());
+  setInterval(() => {
+    console.log(await getCurrentPlayingTrack());
+  }, 2000)
 }
 
 if (store.state.accessToken) {
