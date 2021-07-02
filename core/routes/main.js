@@ -5,7 +5,7 @@ var router = express.Router();
 var { setAccessToken } = require('../spotify-agent');
 
 const { clientId, authorizationToken } = config
-const scopes = 'user-read-private user-read-email';
+const scopes = 'user-read-private user-read-email user-read-currently-playing user-read-playback-state';
 const redirectUrl = encodeURIComponent('http://raspberrypi.local:3000/callback')
 
 router.get('/login', (_, res) => {
