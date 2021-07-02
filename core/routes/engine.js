@@ -31,5 +31,8 @@ setInterval(() => {
   })
 }, 5000)
 
+router.post('/mode', (req, res) => {
+  options.mode = req.body.mode
+})
 
 module.exports = router;
