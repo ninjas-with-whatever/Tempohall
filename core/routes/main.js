@@ -1,20 +1,38 @@
 var express = require('express');
+var axios = require('axios');
+var config = require('../config');
 var router = express.Router();
 
-const clientId = 'f9015141467d4bf2b98639ca736eef6f'
+const { clientId, authorizationToken } = config
 const scopes = 'user-read-private user-read-email';
-const redirectUri = 'http://raspberrypi.local:3000/callback'
+const baseUri = 'http://raspberrypi.local:3000'
 
 router.get('/login', (_, res) => {
   res.redirect('https://accounts.spotify.com/authorize' +
     '?response_type=code' +
     '&client_id=' + clientId +
     '&scope=' + encodeURIComponent(scopes) +
-    '&redirect_uri=' + encodeURIComponent(redirectUri));
+    '&redirect_uri=' + encodeURIComponent(baseUri + '/callback'));
 });
 
 router.get('/callback', (req, res) => {
-  console.log(req)
+  const { callback } = req.query
+  axios.post('https://accounts.spotify.com/api/token', {
+    grant_type: 'authorization_code',
+    code: callback,
+    redirect_uri: baseUri + '/welcome'
+  }, {
+    headers: { 'Authorization': 'Basic ' + authorizationToken }
+  }).then((response) => {
+    console.log(response);
+    res.redirect(baseUri + '/welcome');
+  }).catch((error) => {
+    res.end('Error on Authentication');
+  });
+});
+
+router.get('/welcome', (req, res) => {
+  res.end('WOOOHOOO')
 });
 
 module.exports = router;
