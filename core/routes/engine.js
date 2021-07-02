@@ -3,6 +3,7 @@ var _ = require('lodash');
 var router = express.Router();
 
 var powerController = require("../devices/powerController");
+const { getCurrentTrackFeatures } = require('../spotify-agent/requests');
 
 const options = {
   delay: 0,
@@ -12,8 +13,13 @@ const options = {
   }
 }
 
-router.post('/options', function (req, res, next) {
-  options.delay = parseInt(req.body.delay)
+setInterval(() => {
+  try {
+    options.tempo = 60000 / (await getCurrentTrackFeatures()).tempo
+  } catch (e) {}
+}, 5000)
+
+router.post('/options', async (req, res, next) => {
   options.mode = req.body.mode;
   res.end();
 });
