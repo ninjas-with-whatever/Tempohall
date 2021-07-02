@@ -13,7 +13,8 @@
     "express": "~4.16.1",
     "lodash": "^4.17.21",
     "morgan": "~1.9.1",
-    "onoff": "^6.0.3"
+    "onoff": "^6.0.3",
+    "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.9"

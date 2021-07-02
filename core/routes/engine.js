@@ -29,5 +29,4 @@ router.post('/offset', function (req, res, next) {
 });
 
 
-
 module.exports = router;

@@ -36,7 +36,13 @@ export default {
         this.delayBetweenClicks = [];
         clearInterval(this.beatInterval);
       }
+      else if (!prev && curr) {
+        this.startBeating();
+      }
     },
+    delay() {
+      
+    }
   },
   methods: {
     animateClick() {
@@ -63,10 +69,11 @@ export default {
       }
     },
     calculateDelay() {
-      this.$emit('update:preview', true)
       const delay = this.delayBetweenClicks.reduce((a, b) => a + b) / this.delayBetweenClicks.length;
-      this.$emit('delay', delay)
-
+      this.$emit('update:delay', delay)
+    },
+    startBeating() {
+      clearInterval(this.beatInterval);
       this.beatInterval = setInterval(() => {
         this.$emit('beat')
         this.beat = true;
@@ -74,7 +81,7 @@ export default {
         setTimeout(() => {
           this.beat = false;
         }, 50)
-      }, delay)
+      }, this.delay)
     }
   },
 };

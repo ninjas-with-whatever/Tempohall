@@ -1,11 +1,13 @@
 <template>
   <div>
+    <Bpm :delay.sync="delay" />
     <Clicker @delay="delayReceived" :preview.sync="preview" @beat="onBeat" />
     <Confirm v-if="preview && !confirmOnNextBeat" @confirm="confirm" @retake="retake" />
   </div>
 </template>
 
 <script>
+import Bpm from './Bpm.vue'
 import Clicker from './Clicker.vue'
 import Confirm from './Confirm.vue'
 
@@ -20,7 +22,8 @@ export default {
   },
   components: {
     Clicker,
-    Confirm
+    Confirm,
+    Bpm
   },
   methods: {
     delayReceived(delay) {
