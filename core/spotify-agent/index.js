@@ -8,11 +8,11 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 const getCurrentPlayingTrack = () => {
-  spotifyApi.getMyDevices()
+  spotifyApi.getMyCurrentPlayingTrack()
     .then(function(data) {
-      console.log(data.body);
+      console.log('Now playing: ', data.body);
     }, function(err) {
-      console.log(err);
+      console.log('Something went wrong!', err);
     });
 }
 
