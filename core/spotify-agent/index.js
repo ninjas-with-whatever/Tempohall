@@ -7,9 +7,12 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 const getCurrentPlayingTrack = () => {
-  spotifyApi.getMyCurrentPlayingTrack()
-    .then(function(data) {
-      console.log('Now playing: ', data.body);
+  spotifyApi.getMyRecentlyPlayedTracks({
+    limit : 20
+  }).then(function(data) {
+      // Output items
+      console.log("Your 20 most recently played tracks are:");
+      data.body.items.forEach(item => console.log(item.track));
     }, function(err) {
       console.log('Something went wrong!', err);
     });
