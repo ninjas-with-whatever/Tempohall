@@ -9,7 +9,7 @@ const data = {
   authorizationToken: Buffer.from(`${clientId}:${clientSecret}`).toString('base64'),
   accessToken: '',
   setAccessToken(token) {
-    this.accessToken = token
+    data.accessToken = token
   }
 }
 
