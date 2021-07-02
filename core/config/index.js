@@ -4,5 +4,5 @@ const clientSecret = process.env.CLIENT_SECRET
 module.exports = {
   clientId,
   clientSecret,
-  authorizationToken: btoa(`${clientId}:${clientSecret}`)
+  authorizationToken: Buffer.from(`${clientId}:${clientSecret}`).toString('base64')
 }
