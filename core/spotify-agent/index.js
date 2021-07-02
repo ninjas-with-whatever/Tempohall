@@ -1,18 +1,16 @@
 const SpotifyWebApi = require('spotify-web-api-node');
+const { clientId, clientSecret } = require('../config');
 
 const spotifyApi = new SpotifyWebApi({
-  clientId: 'fcecfc72172e4cd267473117a17cbd4d',
-  clientSecret: 'a6338157c9bb5ac9c71924cb2940e1a7',
-  redirectUri: 'http://www.example.com/callback'
+  clientId: clientId,
+  clientSecret: clientSecret,
+  redirectUri: 'http://raspberrypi.local:3000/callback'
 });
 
 const getCurrentPlayingTrack = () => {
-  spotifyApi.getMyRecentlyPlayedTracks({
-    limit : 20
-  }).then(function(data) {
-      // Output items
-      console.log("Your 20 most recently played tracks are:");
-      data.body.items.forEach(item => console.log(item.track));
+  spotifyApi.getMyCurrentPlayingTrack()
+    .then(function(data) {
+      console.log('Now playing: ', data.body);
     }, function(err) {
       console.log('Something went wrong!', err);
     });
