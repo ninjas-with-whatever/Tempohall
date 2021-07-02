@@ -4,7 +4,7 @@ const storage = new HandyStorage({
     beautify: true
 });
  
-storage.connect('./data.json');
+storage.connect('./.data.json');
 
 storage.setState({
   name: 'Alireza',
