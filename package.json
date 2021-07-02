@@ -1,0 +1,21 @@
+{
+  "name": "tempohall",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd ./client && npm run serve",
+    "core": "cd ./core && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ninjas-with-whatever/Tempohall.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ninjas-with-whatever/Tempohall/issues"
+  },
+  "homepage": "https://github.com/ninjas-with-whatever/Tempohall#readme"
+}
