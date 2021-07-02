@@ -1,6 +1,8 @@
 var express = require('express');
 var cors = require('cors');
 
+require('./spotify-agent');
+
 var mainRouter = require('./routes/main');
 var engineRouter = require('./routes/engine');
 
