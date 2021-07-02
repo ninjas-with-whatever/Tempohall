@@ -21,7 +21,7 @@ router.get('/callback', (req, res) => {
   axios.post('https://accounts.spotify.com/api/token', {
     grant_type: 'authorization_code',
     code,
-    redirect_uri: baseUri + '/welcome'
+    redirect_uri: baseUri + '/callback'
   }, {
     headers: { 'Authorization': 'Basic ' + authorizationToken }
   }).then((response) => {
