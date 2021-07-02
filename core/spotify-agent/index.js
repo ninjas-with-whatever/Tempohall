@@ -8,7 +8,7 @@ const setAccessToken = (token) => {
 
 const setup = async () => {
   setInterval(() => {
-    getCurrentPlayingTrack().then(console.log)
+    getCurrentTrackFeatures().then(console.log)
   }, 10000)
 }
 
