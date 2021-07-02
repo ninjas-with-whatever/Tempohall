@@ -6,15 +6,19 @@ const spotifyApi = new SpotifyWebApi({
   redirectUri: 'http://www.example.com/callback'
 });
 
-const setup = () => {
-  console.log('setup');
-
+const getCurrentPlayingTrack = () => {
   spotifyApi.getMyCurrentPlayingTrack()
-  .then(function(data) {
-    console.log('Now playing: ', data);
-  }, function(err) {
-    console.log('Something went wrong!', err);
-  });
+    .then(function(data) {
+      console.log('Now playing: ', data.body);
+    }, function(err) {
+      console.log('Something went wrong!', err);
+    });
+}
+
+const setup = () => {
+  setInterval(() => {
+    getCurrentPlayingTrack()
+  }, 2000)
 }
 
 module.exports = {
