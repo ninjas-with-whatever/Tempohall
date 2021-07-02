@@ -24,7 +24,7 @@ router.get('/callback', (req, res) => {
     data:{
       grant_type: 'authorization_code',
       code,
-      redirect_uri: baseUri + '/callback'
+      redirect_uri: encodeURIComponent(baseUri + '/callback')
     },
     headers: {
       'Authorization': 'Basic ' + authorizationToken
