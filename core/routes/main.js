@@ -3,7 +3,7 @@ var axios = require('axios');
 var config = require('../config');
 var router = express.Router();
 
-const { clientId, clientSecret } = config
+const { clientId, authorizationToken } = config
 const scopes = 'user-read-private user-read-email';
 const baseUri = 'http://raspberrypi.local:3000'
 
@@ -23,20 +23,14 @@ axios.interceptors.request.use(request => {
 router.get('/callback', (req, res) => {
   const { code } = req.query
 
-  axios.post('https://accounts.spotify.com/api/token', {}, {
-    params: {
-      grant_type: 'authorization_code',
-      code,
-      redirect_uri: baseUri + '/callback'
-    },
+  axios.post('https://accounts.spotify.com/api/token', {
+    grant_type: 'authorization_code',
+    code,
+    redirect_uri: baseUri + '/callback'
+  }, {
     headers: {
-      'Accept':'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Authorization': 'Basic ' + authorizationToken
     },
-    auth: {
-      username: clientId,
-      secret: clientSecret,
-    }
   })
     .then((response) => {
       console.log(response.data);
