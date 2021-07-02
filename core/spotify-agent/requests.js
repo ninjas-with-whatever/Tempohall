@@ -27,10 +27,11 @@ const getTrackFeatures = async (id) => {
 }
 
 const getCurrentTrackFeatures = async () => {
-  const { item } = await getCurrentPlayingTrack();
-  console.log(item);
+  const { item, ...player } = await getCurrentPlayingTrack();
+  console.log(player);
   return {
     item,
+    player,
     ...await getTrackFeatures(item.id)
   }
 }
