@@ -8,8 +8,6 @@ var app = require('../app');
 var debug = require('debug')('tempohall-core:server');
 var http = require('http');
 
-require('dotenv').config({ path: require('find-config')('.env') })
-
 /**
  * Get port from environment and store in Express.
  */
