@@ -19,7 +19,7 @@ const getDevices = async () => {
 }
 
 const getCurrentPlayingTrack = async () => {
-  return (await call('me/player/currently-playing?market=ES'))
+  return (await call('me/player'))
 }
 
 const getTrackFeatures = async (id) => {
