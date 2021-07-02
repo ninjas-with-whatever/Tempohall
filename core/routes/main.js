@@ -15,11 +15,6 @@ router.get('/login', (_, res) => {
     '&redirect_uri=' + redirectUrl);
 });
 
-axios.interceptors.request.use(request => {
-  console.log('Starting Request', JSON.stringify(request, null, 2))
-  return request
-})
-
 router.get('/callback', (req, res) => {
   const { code } = req.query
 
