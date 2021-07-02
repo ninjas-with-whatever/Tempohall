@@ -26,7 +26,7 @@ const getTrackFeatures = async (id) => {
   return (await call(`audio-features/${id}`))
 }
 
-const getCurrentTrackFeatures = async () => {
+const getCurrentTrack = async () => {
   const { item, ...player } = await getCurrentPlayingTrack();
   console.log(player);
   return {
@@ -41,5 +41,5 @@ module.exports = {
   getDevices,
   getCurrentPlayingTrack,
   getTrackFeatures,
-  getCurrentTrackFeatures
+  getCurrentTrack
 }
