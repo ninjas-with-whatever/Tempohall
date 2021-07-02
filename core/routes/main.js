@@ -23,8 +23,10 @@ router.get('/callback', (req, res) => {
       console.error(`exec error: ${error}`);
       return;
     }
-    console.log(`stdout: ${stdout}`);
-    console.error(`stderr: ${stderr}`);
+    
+    const response = JSON.parse(stdout)
+
+    console.log(response)
   });
 });
 
