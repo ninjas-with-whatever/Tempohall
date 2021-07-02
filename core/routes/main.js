@@ -27,6 +27,7 @@ router.get('/callback', (req, res) => {
     console.log(response);
     res.redirect(baseUri + '/welcome');
   }).catch((error) => {
+    console.log(error);
     res.end('Error on Authentication');
   });
 });
