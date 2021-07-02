@@ -9,14 +9,12 @@ const spotifyApi = new SpotifyWebApi({
 const setup = () => {
   console.log('setup');
 
-  spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE').then(
-    function(data) {
-      console.log('Artist albums', data.body);
-    },
-    function(err) {
-      console.error(err);
-    }
-  );
+  spotifyApi.getMyCurrentPlayingTrack()
+  .then(function(data) {
+    console.log('Now playing: ' + data.body.item.name);
+  }, function(err) {
+    console.log('Something went wrong!', err);
+  });
 }
 
 module.exports = {
