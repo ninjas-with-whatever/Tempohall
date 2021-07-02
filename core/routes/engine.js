@@ -19,8 +19,14 @@ setInterval(() => {
     if (currentDelay !== options.delay) {
       options.delay = currentDelay;
       powerController.start(options.delay, {
-        right: [[0.1, 0.1, 0.1, 0.1]],
-        left: [[0.1, 0.1, 0.1, 0.1]]
+        left: [
+          [0.9, 0.1, 0.9, 0.1],
+          [0.1, 0.1, 0.1, 0.1],
+        ],
+        right: [
+          [0.5, 0.2, 0.2, 0.9],
+          [0.5, 1, 1, 0.1],
+        ]
       });
     }
   })
