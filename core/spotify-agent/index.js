@@ -1,4 +1,4 @@
-const { getCurrentPlayingTrack } = require('./requests')
+const { getCurrentTrackFeatures } = require('./requests')
 const store = require('./store')
 
 const setAccessToken = (token) => {
