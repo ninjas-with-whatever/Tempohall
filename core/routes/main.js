@@ -16,3 +16,5 @@ router.get('/login', (_, res) => {
 router.get('/callback', (req, res) => {
   res.end(req)
 });
+
+module.exports = router;
