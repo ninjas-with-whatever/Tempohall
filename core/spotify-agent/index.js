@@ -6,10 +6,10 @@ const setAccessToken = (token) => {
   setup()
 }
 
-const setup = () => {
+const setup = async () => {
   setInterval(() => {
-    console.log(await getCurrentPlayingTrack());
-  }, 2000)
+    getCurrentPlayingTrack().then(console.log)
+  }, 10000)
 }
 
 if (store.state.accessToken) {
