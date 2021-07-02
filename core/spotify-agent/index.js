@@ -11,7 +11,7 @@ const setup = () => {
 
   spotifyApi.getMyCurrentPlayingTrack()
   .then(function(data) {
-    console.log('Now playing: ' + data);
+    console.log('Now playing: ', data);
   }, function(err) {
     console.log('Something went wrong!', err);
   });
