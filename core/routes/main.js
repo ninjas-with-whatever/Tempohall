@@ -1,18 +1,18 @@
 var express = require('express');
-var axios = require('axios');
+const { exec } = require("child_process");
 var config = require('../config');
 var router = express.Router();
 
 const { clientId, authorizationToken } = config
 const scopes = 'user-read-private user-read-email';
-const baseUri = 'http://raspberrypi.local:3000'
+const redirectUrl = encodeURIComponent('http://raspberrypi.local:3000/callback')
 
 router.get('/login', (_, res) => {
   res.redirect('https://accounts.spotify.com/authorize' +
     '?response_type=code' +
     '&client_id=' + clientId +
     '&scope=' + encodeURIComponent(scopes) +
-    '&redirect_uri=' + encodeURIComponent(baseUri + '/callback'));
+    '&redirect_uri=' + redirectUrl);
 });
 
 axios.interceptors.request.use(request => {
@@ -23,22 +23,14 @@ axios.interceptors.request.use(request => {
 router.get('/callback', (req, res) => {
   const { code } = req.query
 
-  axios.post('https://accounts.spotify.com/api/token', {
-    grant_type: 'authorization_code',
-    code,
-    redirect_uri: baseUri + '/callback'
-  }, {
-    headers: {
-      'Authorization': 'Basic ' + authorizationToken,
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-  })
-    .then((response) => {
-      console.log(response.data);
-    }).catch((error) => {
-      console.log(error.status, error.response.status);
-      res.end('Error on Authentication');
-    });
+  exec(`curl -H "Authorization: Basic ${authorizationToken}" -d grant_type=authorization_code -d code=${code} -d redirect_uri=${redirectUrl} https://accounts.spotify.com/api/token`, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`exec error: ${error}`);
+      return;
+    }
+    console.log(`stdout: ${stdout}`);
+    console.error(`stderr: ${stderr}`);
+  });
 });
 
 router.get('/welcome', (req, res) => {
