@@ -15,8 +15,10 @@ const options = {
 
 setInterval(() => {
   getCurrentTrack().then(({ tempo, player }) => {
-    console.log(Date.now() - player.timestamp, player.progress_ms);
+    const offset = Date.now() - player.timestamp - player.progress_ms
+    console.log(offset);
     const currentDelay = Math.floor(60 * 1000 / tempo)
+    powerController.offset = offset % currentDelay;
     if (currentDelay !== options.delay) {
       options.delay = currentDelay;
       powerController.start(options.delay, {
