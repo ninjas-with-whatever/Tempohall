@@ -15,12 +15,14 @@ const setAccessToken = (token) => {
 }
 
 const getCurrentPlayingTrack = () => {
-  spotifyApi.getMe()
-    .then(function(data) {
-      console.log('Some information about the authenticated user', data.body);
-    }, function(err) {
-      console.log('Something went wrong!', err);
-    });
+  spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE').then(
+    function(data) {
+      console.log('Artist albums', data.body);
+    },
+    function(err) {
+      console.error(err);
+    }
+  );
 }
 
 const setup = () => {
