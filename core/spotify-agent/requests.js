@@ -2,6 +2,7 @@ const axios = require('axios')
 const store = require('./store')
 
 const call = async (url = '', { method = 'GET' } = {}) => {
+  console.log('Hellooooooo')
   const options = {
     method,
     url: `https://api.spotify.com/v1/${url}`,

@@ -9,12 +9,11 @@ const scopes = 'user-read-private user-read-email user-read-currently-playing us
 const redirectUrl = encodeURIComponent('http://raspberrypi.local:3000/callback')
 
 router.get('/login', (_, res) => {
-  res.redirect('https://google.com')
-  // res.redirect('https://accounts.spotify.com/authorize' +
-  //   '?response_type=code' +
-  //   '&client_id=' + clientId +
-  //   '&scope=' + encodeURIComponent(scopes) +
-  //   '&redirect_uri=' + redirectUrl);
+  res.redirect('https://accounts.spotify.com/authorize' +
+    '?response_type=code' +
+    '&client_id=' + clientId +
+    '&scope=' + encodeURIComponent(scopes) +
+    '&redirect_uri=' + redirectUrl);
 });
 
 router.get('/callback', (req, res) => {
