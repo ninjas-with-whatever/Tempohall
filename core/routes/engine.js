@@ -3,7 +3,7 @@ var _ = require('lodash');
 var router = express.Router();
 
 var powerController = require("../devices/powerController");
-const { getCurrentTrack } = require('../spotify-agent/requests');
+const { getCurrentTrack, canRequest } = require('../spotify-agent/requests');
 
 const options = {
   delay: 0,
@@ -14,6 +14,8 @@ const options = {
 }
 
 setInterval(() => {
+  if (!canRequest()) return;
+  
   getCurrentTrack().then(({ tempo, player }) => {
     const currentDelay = Math.floor(60 * 1000 / tempo)
     powerController.offset = 0;

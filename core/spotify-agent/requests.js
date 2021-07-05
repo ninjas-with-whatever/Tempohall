@@ -2,10 +2,6 @@ const axios = require('axios')
 const store = require('./store')
 
 const call = async (url = '', { method = 'GET' } = {}) => {
-  if (!store.state.accessToken) {
-    return {};
-  }
-
   const options = {
     method,
     url: `https://api.spotify.com/v1/${url}`,
@@ -44,5 +40,8 @@ module.exports = {
   getDevices,
   getCurrentPlayingTrack,
   getTrackFeatures,
-  getCurrentTrack
+  getCurrentTrack,
+  canRequest() {
+    return !!store.state.accessToken
+  }
 }
