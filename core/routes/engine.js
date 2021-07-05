@@ -33,6 +33,7 @@ setInterval(() => {
 router.post('/mode', (req, res) => {
   options.mode = req.body.mode
   res.json(req.body.mode)
+  res.end();
 })
 
 module.exports = router;
