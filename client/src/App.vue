@@ -47,7 +47,7 @@ export default {
       this.step = STEPS.MODE;
     },
     sendOptions({ delay, mode }) {
-      axios.post('http://raspberrypi.local:3000/engine/options', {
+      axios.post('http://raspberrypi.local:3000/engine/mode', {
         delay,
         mode
       })
