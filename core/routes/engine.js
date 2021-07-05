@@ -15,7 +15,7 @@ const options = {
 
 setInterval(() => {
   if (!canRequest()) return;
-  
+
   getCurrentTrack().then(({ tempo, player }) => {
     const currentDelay = Math.floor(60 * 1000 / tempo)
     powerController.offset = 0;
@@ -35,6 +35,7 @@ setInterval(() => {
 
 router.post('/mode', (req, res) => {
   options.mode = req.body.mode
+  res.json(req.body.mode)
 })
 
 module.exports = router;
