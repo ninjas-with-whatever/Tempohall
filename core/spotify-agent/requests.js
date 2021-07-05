@@ -31,7 +31,7 @@ const getCurrentTrack = async () => {
   return {
     item,
     player,
-    ...await getTrackFeatures(item.id)
+    ...(item && await getTrackFeatures(item.id))
   }
 }
 
