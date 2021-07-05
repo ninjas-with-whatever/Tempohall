@@ -8,8 +8,12 @@ const { getCurrentTrack, canRequest } = require('../spotify-agent/requests');
 const options = {
   delay: 0,
   mode: {
-    right: [],
-    left: []
+    left: [
+      [0.1, 0.3, 0.1, 0.3],
+    ],
+    right: [
+      [0.3, 0.1, 0.3, 0.1],
+    ]
   }
 }
 
@@ -21,14 +25,7 @@ setInterval(() => {
     powerController.offset = 0;
     if (currentDelay !== options.delay) {
       options.delay = currentDelay;
-      powerController.start(options.delay, {
-        left: [
-          [0.1, 0.3, 0.1, 0.3],
-        ],
-        right: [
-          [0.3, 0.1, 0.3, 0.1],
-        ]
-      });
+      powerController.start(options.delay, options.mode);
     }
   })
 }, 5000)
